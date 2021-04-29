@@ -1,6 +1,7 @@
 import 'cross-fetch/polyfill'
 import {getInput} from '@actions/core'
 
+
 export async function retrieveData(): Promise<Record<string, unknown>> {
   const query = `query { 
         viewer {
