@@ -1,6 +1,6 @@
 import {info, setFailed} from '@actions/core'
 import {action, ActionInterface} from './constants'
-import {retrieveData} from './fetch'
+import {retrieveData, generateTemplate} from './fetch'
 
 /** Initializes and runs the action.
  *
@@ -27,6 +27,8 @@ export default async function run(
     const response: any = await retrieveData()
 
     console.log(response.data.viewer.sponsorshipsAsMaintainer, response.data.viewer.sponsorshipsAsMaintainer.nodes[0])
+
+    await generateTemplate(response)
   } catch (error) {
     errorState = true
     setFailed(error.message)
