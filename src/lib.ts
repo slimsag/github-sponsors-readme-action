@@ -24,9 +24,9 @@ export default async function run(
 
     info('Checking configuration and initializing… 🚚')
 
-    const data: any = await retrieveData()
+    const response: any = await retrieveData()
 
-    console.log(data, data.data.viewer.sponsorshipsAsMaintainer)
+    console.log(response.data.viewer.sponsorshipsAsMaintainer, response.data.viewer.sponsorshipsAsMaintainer.nodes[0])
   } catch (error) {
     errorState = true
     setFailed(error.message)
