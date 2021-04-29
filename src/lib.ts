@@ -26,7 +26,7 @@ export default async function run(
 
     const data: any = await retrieveData()
 
-    console.log(data.viewer.sponsorshipsAsMaintainer)
+    console.log(data.viewer, data.viewer.sponsorshipsAsMaintainer)
   } catch (error) {
     errorState = true
     setFailed(error.message)
