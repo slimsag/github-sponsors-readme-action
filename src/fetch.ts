@@ -1,4 +1,5 @@
 import 'cross-fetch/polyfill'
+import {getInput} from '@actions/core'
 
 export async function retrieveData(): Promise<Record<string, unknown>> {
   const query = `query { 
@@ -32,9 +33,10 @@ export async function retrieveData(): Promise<Record<string, unknown>> {
         }
       }`
 
-  const data = await fetch('/graphql', {
+  const data = await fetch('https://api.github.com/graphql', {
     method: 'POST',
     headers: {
+      Authorization: `Bearer ${getInput('token')}`,
       'Content-Type': 'application/json',
       Accept: 'application/json'
     },
