@@ -18,11 +18,6 @@ export async function retrieveData(): Promise<Record<string, unknown>> {
                   login
                   url
                 }
-                ... on Organization {
-                  name
-                  url
-                  login
-                }
               }
               createdAt
               privacyLevel
