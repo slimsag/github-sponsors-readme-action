@@ -46,7 +46,7 @@ export async function retrieveData(): Promise<Record<string, unknown>> {
   return data.json()
 }
 
-export async function generatePlaceholders(response) {
+export function generatePlaceholders(response) {
   let placeholder = ``
 
   response.data.viewer.sponsorshipsAsMaintainer.nodes.map(({sponsorEntity}) => {
@@ -57,7 +57,7 @@ export async function generatePlaceholders(response) {
 
 }
 
-export async function generateTemplate(response): Promise<void> {
+export function generateTemplate(response) {
   const template = getInput('template');
 
   console.log('reading file...')

@@ -28,7 +28,7 @@ export default async function run(
 
     console.log(response.data.viewer.sponsorshipsAsMaintainer, response.data.viewer.sponsorshipsAsMaintainer.nodes[0])
 
-    await generateTemplate(response)
+    generateTemplate(response)
   } catch (error) {
     errorState = true
     setFailed(error.message)
