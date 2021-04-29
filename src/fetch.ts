@@ -46,7 +46,7 @@ export async function retrieveData(): Promise<Record<string, unknown>> {
     })
   })
 
-  console.log(data)
+  console.log('data', data)
 
   return data.json()
 }
