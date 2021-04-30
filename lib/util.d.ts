@@ -1,1 +1,1 @@
-export declare const isNullOrUndefined: (value: string | null | undefined) => boolean;
+export declare const isNullOrUndefined: (value: string | undefined | null) => boolean;
