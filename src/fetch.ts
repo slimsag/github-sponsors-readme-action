@@ -54,22 +54,19 @@ export function generatePlaceholders(response): string {
   return placeholder
 }
 
-export async function generateTemplate(response: any): Promise<void> {
+export async function generateTemplate(response): Promise<void> {
   try {
     const template = getInput('template')
-    let replacedData = ''
 
     console.log('reading file...')
-    await promises.readFile(template, 'utf8', function (err, data) {
-      if (err) throw err
-      replacedData = data.replace(
-        /\<\!\-\-replaceme\-\-\>((.|[\n|\r|\r\n])*?)\<\!\-\-replaceme\-\-\>[\n|\r|\r\n]?(\s+)?/g,
-        generatePlaceholders(response)
-      )
-    })
+    let data = await promises.readFile(template, 'utf8')
 
-    console.log('replacing with....', replacedData)
-    await promises.writeFile(template, replacedData)
+    data = data.replace(
+      /<!-- START COMMENT -->[\s\S]*?<!-- END COMMENT -->/g,
+      generatePlaceholders(response)
+    )
+
+    await promises.writeFile(template, data)
   } catch (error) {
     throw new Error('Caught an error')
   }
