@@ -57,7 +57,7 @@ export function generatePlaceholders(response): string {
 export async function generateTemplate(response: any): Promise<void> {
   try {
     const template = getInput('template')
-    const replacedData = ''
+    let replacedData = ''
 
     console.log('reading file...')
     await promises.readFile(template, 'utf8', function (err, data) {
@@ -68,6 +68,7 @@ export async function generateTemplate(response: any): Promise<void> {
       )
     })
 
+    console.log('replacing with....', replacedData)
     await promises.writeFile(template, replacedData)
   } catch (error) {
     throw new Error('Caught an error')
