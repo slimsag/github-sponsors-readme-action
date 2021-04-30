@@ -24,7 +24,7 @@ export const action = {
     : `<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>`,
   sponsorshipThreshold: !isNullOrUndefined(getInput('sponsorship-threshold'))
     ? parseInt(getInput('sponsorship-threshold'))
-    : 0,
+    : 1,
   marker: getInput('marker'),
   file: getInput('file')
 }

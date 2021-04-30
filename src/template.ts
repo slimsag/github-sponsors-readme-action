@@ -90,6 +90,8 @@ export function generateTemplate(
       template = template += render(action.template, sponsorEntity)
     })
 
+  console.log(template);
+
   return template
 }
 
@@ -111,6 +113,8 @@ export async function generateFile(
     let data = await promises.readFile(action.file, 'utf8')
 
     data = data.replace(regex, `$1${generateTemplate(response, action)}$2`)
+
+    console.log(regex)
 
     await promises.writeFile(action.file, data)
   } catch (error) {
