@@ -14,6 +14,8 @@ export interface ActionInterface {
   marker: string
   /** If the user has no sponsors, we can replace it with a fallback. */
   fallback: string
+  /** Fetches organization level sponsors if true. */
+  organization: boolean
 }
 
 // Required action data that gets initialized when running within the GitHub Actions environment.
@@ -29,12 +31,10 @@ export const action = {
     ? getInput('marker')
     : 'sponsors',
   file: getInput('file'),
-  fallback: !isNullOrUndefined(getInput('fallback'))
-    ? getInput('fallback')
-    : ``,
+  fallback: !isNullOrUndefined(getInput('fallback')) ? getInput('fallback') : ``,
   organization: !isNullOrUndefined(getInput('organization'))
-    ? getInput('organization').toLowerCase() === 'true'
-    : false
+  ? getInput('organization').toLowerCase() === 'true'
+  : false,
 }
 
 /** Describes the response from the GitHub GraphQL query. */
@@ -73,36 +73,15 @@ export type RequiredActionParameters = Pick<
   'token' | 'file' | 'marker'
 >
 
+export enum PrivacyLevel {
+  PUBLIC = 'PUBLIC',
+  PRIVATE = 'PRIVATE'
+}
+
 /** Status codes for the action. */
 export enum Status {
   SUCCESS = 'success',
   FAILED = 'failed',
   SKIPPED = 'skipped',
   RUNNING = 'running'
-}
-
-export enum PrivacyLevel {
-  PUBLIC = 'PUBLIC',
-  PRIVATE = 'PRIVATE'
-}
-
-export interface Sponsor {
-  sponsorEntity: {
-    name: string | null
-    login: string
-    url: string
-  }
-  createdAt: string
-  privacyLevel: PrivacyLevel
-  tier: {
-    monthlyPriceInCents: number
-  }
-}
-
-export interface SponsorshipsAsMaintainer {
-  totalCount: number
-  pageInfo: {
-    endCursor: string
-  }
-  nodes: Sponsor[]
 }
