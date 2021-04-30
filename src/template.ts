@@ -90,8 +90,6 @@ export function generateTemplate(
       template = template += render(action.template, sponsorEntity)
     })
 
-  console.log(template);
-
   return template
 }
 
@@ -103,18 +101,12 @@ export async function generateFile(
     info(`Generating updated ${action.file}… 🚚`)
 
     const regex = new RegExp(
-      '(<!-- START ' +
-        action.marker +
-        ' -->)[sS]*?(<!-- END ' +
-        action.marker +
-        ' -->)',
+      `(<!-- ${action.marker} -->)[\s\\\S]*?(<!-- ${action.marker} -->)`,
       'g'
     )
     let data = await promises.readFile(action.file, 'utf8')
 
     data = data.replace(regex, `$1${generateTemplate(response, action)}$2`)
-
-    console.log(regex)
 
     await promises.writeFile(action.file, data)
   } catch (error) {
