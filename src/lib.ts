@@ -1,6 +1,6 @@
 import {info, setFailed} from '@actions/core'
 import {action, ActionInterface} from './constants'
-import {retrieveData, generateTemplate} from './fetch'
+import {retrieveData, generateTemplate, generateFile} from './fetch'
 
 /** Initializes and runs the action.
  *
@@ -31,7 +31,7 @@ export default async function run(
       response.data.viewer.sponsorshipsAsMaintainer.nodes[0]
     )
 
-    generateTemplate(response)
+    await generateFile(response)
   } catch (error) {
     errorState = true
     setFailed(error.message)

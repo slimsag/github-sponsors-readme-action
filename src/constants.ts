@@ -7,3 +7,8 @@ export interface ActionInterface {
 export const action = {
   template: '123'
 }
+
+export enum PrivacyLevel {
+  PUBLIC = 'PUBLIC',
+  PRIVATE = 'PRIVATE'
+}

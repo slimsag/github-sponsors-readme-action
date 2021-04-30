@@ -1,6 +1,7 @@
 import 'cross-fetch/polyfill'
 import {getInput} from '@actions/core'
 import {promises} from 'fs'
+import {PrivacyLevel, Sponsor, SponsorshipsAsMaintainer} from './constants'
 
 export async function retrieveData(): Promise<Record<string, unknown>> {
   const query = `query { 
@@ -44,26 +45,32 @@ export async function retrieveData(): Promise<Record<string, unknown>> {
   return data.json()
 }
 
-export function generatePlaceholders(response): string {
+export function generateTemplate(response): string {
   let placeholder = ``
 
-  response.data.viewer.sponsorshipsAsMaintainer.nodes.map(({sponsorEntity}) => {
-    placeholder = placeholder += `<a href=""><img src="https://avatars.githubusercontent.com/u/10888441?v=4" /></a> Name is ${sponsorEntity.name}`
-  })
+  const sponsorshipsAsMaintainer: SponsorshipsAsMaintainer =
+    response.data.viewer.sponsorshipsAsMaintainer
+
+  sponsorshipsAsMaintainer.nodes
+    .filter((user: Sponsor) => user.privacyLevel !== PrivacyLevel.PRIVATE)
+    .map(({sponsorEntity}) => {
+      placeholder = placeholder += `<a href="https://github.com/${sponsorEntity.login}"><img src="https://github.com/${
+        sponsorEntity.login
+      }.png" /></a>
+      }`
+    })
 
   return placeholder
 }
 
-export async function generateTemplate(response): Promise<void> {
+export async function generateFile(response): Promise<void> {
   try {
     const template = getInput('template')
-
-    console.log('reading file...')
     let data = await promises.readFile(template, 'utf8')
 
     data = data.replace(
       /<!-- START COMMENT -->[\s\S]*?<!-- END COMMENT -->/g,
-      generatePlaceholders(response)
+      generateTemplate(response)
     )
 
     console.log('replacing contents', data)
