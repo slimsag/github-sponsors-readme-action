@@ -13,7 +13,7 @@ export interface ActionInterface {
   /** The marker at which the content should be included within. */
   marker: string
   /** If the user has no sponsors, we can replace it with a fallback. */
-  fallback?: string
+  fallback: string
 }
 
 // Required action data that gets initialized when running within the GitHub Actions environment.
@@ -24,9 +24,12 @@ export const action = {
     : `<a href="https://github.com/{{{ login }}}"><img src="https://github.com/{{{ login }}}.png" width="60px" alt="" /></a>`,
   sponsorshipThreshold: !isNullOrUndefined(getInput('sponsorship-threshold'))
     ? parseInt(getInput('sponsorship-threshold'))
-    : 1,
-  marker: getInput('marker'),
-  file: getInput('file')
+    : 0,
+  marker: !isNullOrUndefined(getInput('marker'))
+    ? getInput('marker')
+    : 'sponsors',
+  file: getInput('file'),
+  fallback: !isNullOrUndefined(getInput('fallback')) ? getInput('fallback') : ``
 }
 
 /** Describes the response from the GitHub GraphQL query. */
