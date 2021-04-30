@@ -26,7 +26,10 @@ export default async function run(
 
     const response: any = await retrieveData()
 
-    console.log(response.data.viewer.sponsorshipsAsMaintainer, response.data.viewer.sponsorshipsAsMaintainer.nodes[0])
+    console.log(
+      response.data.viewer.sponsorshipsAsMaintainer,
+      response.data.viewer.sponsorshipsAsMaintainer.nodes[0]
+    )
 
     generateTemplate(response)
   } catch (error) {
