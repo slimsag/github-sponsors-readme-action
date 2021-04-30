@@ -66,7 +66,7 @@ export async function generateFile(response): Promise<void> {
     let data = await promises.readFile(template, 'utf8')
 
     data = data.replace(
-      /(<!-- START COMMENT -->)[\s\S]*?(<!-- END COMMENT -->)/g,
+      /(<!-- START COMMENT -->)[\s\S]*?(<!-- END COMMENT -->)/,
       `$1${generateTemplate(response)}$2`
     )
 
