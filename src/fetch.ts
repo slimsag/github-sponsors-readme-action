@@ -66,6 +66,8 @@ export async function generateTemplate(response): Promise<void> {
       generatePlaceholders(response)
     )
 
+    console.log('replacing contents', data)
+
     await promises.writeFile(template, data)
   } catch (error) {
     throw new Error('Caught an error')
