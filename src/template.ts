@@ -103,9 +103,9 @@ export async function generateFile(
     info(`Generating updated ${action.file}… 🚚`)
 
     const regex = new RegExp(
-      '/(<!-- ' +
+      '/(<!-- START ' +
         action.marker +
-        ' -->)[sS]*?(<!-- ' +
+        ' -->)[sS]*?(<!-- END ' +
         action.marker +
         ' -->)/',
       'g'
