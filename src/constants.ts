@@ -65,11 +65,6 @@ export type RequiredActionParameters = Pick<
   'token' | 'file' | 'marker'
 >
 
-export enum PrivacyLevel {
-  PUBLIC = 'PUBLIC',
-  PRIVATE = 'PRIVATE'
-}
-
 /** Status codes for the action. */
 export enum Status {
   SUCCESS = 'success',
