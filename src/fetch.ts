@@ -54,10 +54,7 @@ export function generateTemplate(response): string {
   sponsorshipsAsMaintainer.nodes
     .filter((user: Sponsor) => user.privacyLevel !== PrivacyLevel.PRIVATE)
     .map(({sponsorEntity}) => {
-      placeholder = placeholder += `<a href="https://github.com/${sponsorEntity.login}"><img src="https://github.com/${
-        sponsorEntity.login
-      }.png" /></a>
-      }`
+      placeholder = placeholder += `<a href="https://github.com/${sponsorEntity.login}"><img src="https://github.com/${sponsorEntity.login}.png" width="60px" alt="" /></a>`
     })
 
   return placeholder

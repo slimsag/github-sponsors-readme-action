@@ -1,6 +1,6 @@
 /* eslint-disable */
 window.PR_SHOULD_USE_CONTINUATION = true
-;(function() {
+;(function () {
   var h = ['break,continue,do,else,for,if,return,while']
   var u = [
     h,
@@ -144,7 +144,7 @@ window.PR_SHOULD_USE_CONTINUATION = true
           }
         }
       }
-      af.sort(function(av, au) {
+      af.sort(function (av, au) {
         return av[0] - au[0] || au[1] - av[1]
       })
       var ai = []
@@ -231,7 +231,7 @@ window.PR_SHOULD_USE_CONTINUATION = true
             aj[ak] = X(ag)
           } else {
             if (ai !== '\\') {
-              aj[ak] = ag.replace(/[a-zA-Z]/g, function(ao) {
+              aj[ak] = ag.replace(/[a-zA-Z]/g, function (ao) {
                 var ap = ao.charCodeAt(0)
                 return '[' + String.fromCharCode(ap & ~32, ap | 32) + ']'
               })
@@ -324,7 +324,7 @@ window.PR_SHOULD_USE_CONTINUATION = true
   function g(U, T) {
     var S = {}
     var V
-    ;(function() {
+    ;(function () {
       var ad = U.concat(T)
       var ah = []
       var ag = {}
@@ -347,7 +347,7 @@ window.PR_SHOULD_USE_CONTINUATION = true
       V = k(ah)
     })()
     var X = T.length
-    var W = function(ah) {
+    var W = function (ah) {
       var Z = ah.sourceCode,
         Y = ah.basePos
       var ad = [Y, F]
@@ -845,7 +845,7 @@ window.PR_SHOULD_USE_CONTINUATION = true
     var W = Date
     if (!W.now) {
       W = {
-        now: function() {
+        now: function () {
           return +new Date()
         }
       }

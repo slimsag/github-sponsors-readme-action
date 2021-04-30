@@ -15,21 +15,21 @@ export enum PrivacyLevel {
 
 export interface Sponsor {
   sponsorEntity: {
-    name: string | null;
-    login: string;
+    name: string | null
+    login: string
     url: string
   }
-  createdAt: string;
-  privacyLevel: PrivacyLevel;
+  createdAt: string
+  privacyLevel: PrivacyLevel
   tier: {
-    monthlyPriceInCents: number;
+    monthlyPriceInCents: number
   }
 }
 
 export interface SponsorshipsAsMaintainer {
-  totalCount: number;
+  totalCount: number
   pageInfo: {
-    endCursor: string;
+    endCursor: string
   }
   nodes: Sponsor[]
 }
