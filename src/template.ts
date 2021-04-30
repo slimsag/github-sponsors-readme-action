@@ -78,6 +78,10 @@ export function generateTemplate(
     sponsorshipsAsMaintainer
   }: {sponsorshipsAsMaintainer: SponsorshipsAsMaintainer} = response.data.viewer
 
+  if (!sponsorshipsAsMaintainer.nodes) {
+    return action.fallback;
+  }
+
   /* Appends the template, the API call returns all users regardless of if they are hidden or not.
   In an effort to respect a users decisison to be anoymous we filter these users out. */
   sponsorshipsAsMaintainer.nodes
@@ -101,7 +105,7 @@ export async function generateFile(
     info(`Generating updated ${action.file}… 🚚`)
 
     const regex = new RegExp(
-      `(<!-- ${action.marker} -->)[\s\\\S]*?(<!-- ${action.marker} -->)`,
+      `(<!-- ${action.marker} -->)[\\s\\S]*?(<!-- ${action.marker} -->)`,
       'g'
     )
     let data = await promises.readFile(action.file, 'utf8')
