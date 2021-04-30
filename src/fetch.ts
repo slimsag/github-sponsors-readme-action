@@ -61,15 +61,12 @@ export function generateTemplate(response) {
   const template = getInput('template');
 
   console.log('reading file...')
-  fs.readFile(`${template}.template.md`, 'utf8', function (err,data) {
-    if (err) {
-      return console.log(err);
-    }
-    var result = data.replace(/replaceme/g, generatePlaceholders(response));
+  fs.readFile(template, 'utf8', function (err,data) {
+    if(err) throw err;
+    data = data.replace(/\<\!\-\-replaceme\-\-\>((.|[\n|\r|\r\n])*?)\<\!\-\-replaceme\-\-\>[\n|\r|\r\n]?(\s+)?/g, generatePlaceholders(response));
   
-    console.log('writing file...')
-    fs.writeFile(`${template}.md`, result, 'utf8', function (err) {
-       if (err) return console.log(err);
-    });
+    fs.writeFile(template, data, function(err) {
+      err || console.log('Data replaced \n', data);
+  });
   });
 }
