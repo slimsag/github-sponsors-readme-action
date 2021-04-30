@@ -54,7 +54,7 @@ export function generateTemplate(response): string {
   sponsorshipsAsMaintainer.nodes
     .filter((user: Sponsor) => user.privacyLevel !== PrivacyLevel.PRIVATE)
     .map(({sponsorEntity}) => {
-      placeholder = placeholder += `<a href="https://github.com/${sponsorEntity.login}"><img src="https://github.com/${sponsorEntity.login}.png" width="60px" alt="" /></a>`
+      placeholder = placeholder += `$<a href="https://github.com/${sponsorEntity.login}"><img src="https://github.com/${sponsorEntity.login}.png" width="60px" alt="" /></a>`
     })
 
   return placeholder
@@ -66,8 +66,8 @@ export async function generateFile(response): Promise<void> {
     let data = await promises.readFile(template, 'utf8')
 
     data = data.replace(
-      /<!-- START COMMENT -->[\s\S]*?<!-- END COMMENT -->/g,
-      generateTemplate(response)
+      /(<!-- START COMMENT -->)[\s\S]*?(<!-- END COMMENT -->)/g,
+      `$1${generateTemplate(response)}$2`
     )
 
     console.log('replacing contents', data)
