@@ -10,7 +10,7 @@ export interface ActionInterface {
     /** The marker at which the content should be included within. */
     marker: string;
     /** If the user has no sponsors, we can replace it with a fallback. */
-    fallback?: string;
+    fallback: string;
 }
 export declare const action: {
     token: string;
@@ -18,6 +18,7 @@ export declare const action: {
     sponsorshipThreshold: number;
     marker: string;
     file: string;
+    fallback: string;
 };
 /** Describes the response from the GitHub GraphQL query. */
 export interface Sponsor {
