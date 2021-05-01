@@ -6,7 +6,9 @@ export interface ActionInterface {
     /** The file to replace the content in. */
     file: string;
     /** The minimum amount sponsored to be included. */
-    sponsorshipThreshold: number;
+    minimum: number;
+    /** The maximum amount sponsored to be included. */
+    maximum: number;
     /** The marker at which the content should be included within. */
     marker: string;
     /** If the user has no sponsors, we can replace it with a fallback. */
@@ -17,7 +19,8 @@ export interface ActionInterface {
 export declare const action: {
     token: string;
     template: string;
-    sponsorshipThreshold: number;
+    minimum: number;
+    maximum: number;
     marker: string;
     file: string;
     fallback: string;
@@ -60,6 +63,5 @@ export declare enum PrivacyLevel {
 export declare enum Status {
     SUCCESS = "success",
     FAILED = "failed",
-    SKIPPED = "skipped",
     RUNNING = "running"
 }
